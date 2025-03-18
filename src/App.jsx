@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import CompaniesPage from "./pages/company/CompaniesPage";
 
-function App() {
+const App = () => {
   return (
     <Router>
       <nav>

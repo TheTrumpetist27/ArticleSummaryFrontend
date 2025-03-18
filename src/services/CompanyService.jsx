@@ -1,13 +1,14 @@
-const companies = [
-    {id: 1, name: 'Google'},
-    {id: 2, name: 'Facebook'},
-    {id: 3, name: 'Apple'}
-]
+const API_URL = 'https://localhost:7263/api/Company';
 
-export function getCompanies() {
-    return new Promise((resolve) => {
-        setTimeout(() => {
-            resolve(companies)
-        }, 500);
-    });
-}
+export const getCompanies = async () => {
+    try {
+        const response = await fetch(API_URL);
+        if (!response.ok) {
+            throw new Error('Failed to fetch companies');
+        }
+        return await response.json();
+    } catch (error) {
+        console.error('Error fetching companies: ', error);
+        return [];
+    }
+};

@@ -1,6 +1,6 @@
 import CompanyList from "../../components/company/CompanyList";
 
-function CompaniesPage() {
+const CompaniesPage = () => {
     return (
         <div>
             <h1>Companies</h1>

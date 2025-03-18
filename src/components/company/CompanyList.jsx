@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { getCompanies } from "../../services/CompanyService";
 
-function CompanyList() {
+const CompanyList = () => {
     const [companies, setCompanies] = useState([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        async function fetchCompanies() {
+        const fetchCompanies = async () => {
             const data = await getCompanies();
             setCompanies(data);
             setLoading(false);
