@@ -1,3 +1,30 @@
+@import "tailwindcss";
+
+@theme {
+  --color-slate-50: #f8fafc; /* Hoofdachtergrond */
+
+  colors {
+    /* 🎨 Backgrounds & Surfaces */
+    background: #f8fafc; /* Hoofdachtergrond - licht & schoon */
+    card: #ffffff; /* Kaarten & modals */
+    border: #e2e8f0; /* Lichte randen & dividers */
+
+    /* 🧱 Primair - Zakelijk grijsblauw */
+    text: #334155; /* Standaard tekstkleur */
+    heading: #1e293b; /* Titels & koppen */
+    sidebar: #1e293b; /* Sidebar achtergrond */
+
+    /* 🔹 Accentkleur - Professioneel blauw */
+    accent: #0ea5e9; /* CTA's / knoppen */
+    accent-hover: #38bdf8; /* Hover-effect voor accent */
+    accent-soft: #bae6fd; /* Badges, lichte highlights */
+
+    /* ✅ Feedback-kleuren */
+    success: #22c55e; /* Success messages */
+    error: #ef4444; /* Error messages */
+  }
+}
+
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
