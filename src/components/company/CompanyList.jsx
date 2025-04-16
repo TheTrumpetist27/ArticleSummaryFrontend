@@ -17,11 +17,28 @@ const CompanyList = () => {
     if (loading) return <p>Loading...</p>;
 
     return (
-        <ul>
-            {companies.map((company) => (
-                <li key={company.id}>{company.name}</li>
-            ))}
-        </ul>
+        <div className="overflow-x-auto">
+            <table className="min-w-full text-left text-sm bg-white border border-slate-200 rounded-lg shadow">
+                <thead className="bg-slate-50 text-slate-800">
+                    <tr>
+                        <th className="px-6 py-3 border-b border-slate-200">Bedrijfsnaam</th>
+                        <th className="px-6 py-3 border-b border-slate-200">Acties</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {companies.map((company) => (
+                        <tr key={company.id} className="hover:bg-sky-200 transition">
+                            <td className="px-6 py-4 border-b border-slate-200">{company.name}</td>
+                            <td className="px-6 py-4 border-b border-[--color-slate-200]">
+                                <button className="text-sky-500 hover:text-sky-800 font-medium">
+                                    Bekijk
+                                </button>
+                            </td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+        </div>
     );
 }
 

@@ -5,9 +5,6 @@ import CompaniesPage from "./pages/company/CompaniesPage";
 const App = () => {
   return (
     <Router>
-      <nav>
-        <Link to="/">Home</Link> | <Link to="/companies">Bedrijven</Link>
-      </nav>
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/companies" element={<CompaniesPage />} />
