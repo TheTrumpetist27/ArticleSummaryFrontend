@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
-import { getCompanies } from "../../services/CompanyService";
+import { getAllCompanies } from "../../services/CompanyService";
+import CompanyDeleteButton from "./CompanyDeleteButton";
+import { DeleteCompany } from "../../services/CompanyService";
 
 const CompanyList = () => {
     const [companies, setCompanies] = useState([]);
@@ -7,12 +9,22 @@ const CompanyList = () => {
 
     useEffect(() => {
         const fetchCompanies = async () => {
-            const data = await getCompanies();
+            const data = await getAllCompanies();
             setCompanies(data);
             setLoading(false);
         }
         fetchCompanies();
     }, []);
+
+    const handleDelete = async (id) => {
+        try {
+            await DeleteCompany(id);
+
+            setCompanies((prevCompanies) => prevCompanies.filter(company => company.id !== id));
+        } catch (error) {
+            console.error("Error deleting company:", error);
+        }
+    }
 
     if (loading) return <p>Loading...</p>;
 
@@ -30,9 +42,7 @@ const CompanyList = () => {
                         <tr key={company.id} className="hover:bg-sky-200 transition">
                             <td className="px-6 py-4 border-b border-slate-200">{company.name}</td>
                             <td className="px-6 py-4 border-b border-[--color-slate-200]">
-                                <button className="text-sky-500 hover:text-sky-800 font-medium">
-                                    Bekijk
-                                </button>
+                                <CompanyDeleteButton onClick={() => handleDelete(company.id)} />
                             </td>
                         </tr>
                     ))}
