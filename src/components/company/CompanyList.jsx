@@ -1,15 +1,17 @@
 import { useEffect, useState } from "react";
-import { getAllCompanies } from "../../services/CompanyService";
+import { GetAllCompanies } from "../../services/CompanyService";
 import CompanyDeleteButton from "./CompanyDeleteButton";
 import { DeleteCompany } from "../../services/CompanyService";
+import { useNavigate } from "react-router-dom";
 
 const CompanyList = () => {
     const [companies, setCompanies] = useState([]);
     const [loading, setLoading] = useState(true);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchCompanies = async () => {
-            const data = await getAllCompanies();
+            const data = await GetAllCompanies();
             setCompanies(data);
             setLoading(false);
         }
@@ -40,7 +42,7 @@ const CompanyList = () => {
                 <tbody>
                     {companies.map((company) => (
                         <tr key={company.id} className="hover:bg-sky-200 transition">
-                            <td className="px-6 py-4 border-b border-slate-200">{company.name}</td>
+                            <td className="px-6 py-4 border-b border-slate-200 hover:cursor-pointer" onClick={() => navigate(`/company/${company.id}`)}>{company.name}</td>
                             <td className="px-6 py-4 border-b border-[--color-slate-200]">
                                 <CompanyDeleteButton onClick={() => handleDelete(company.id)} />
                             </td>
