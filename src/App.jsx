@@ -4,6 +4,8 @@ import CompaniesPage from "./pages/company/CompaniesPage";
 import AddCompanyPage from "./pages/company/AddCompanyPage";
 import CompanyPage from "./pages/company/CompanyPage";
 import EditCompanyPage from "./pages/company/EditCompanyPage";
+import AddArticlePage from "./pages/article/AddArticlePage";
+import ArticlesPage from "./pages/article/ArticlesPage";
 
 const App = () => {
   return (
@@ -14,6 +16,8 @@ const App = () => {
         <Route path="/company/add" element={<AddCompanyPage />} />
         <Route path="/company/:id" element={<CompanyPage />} />
         <Route path="/company/edit/:id" element={<EditCompanyPage />} />
+        <Route path="/articles" element={<ArticlesPage />} />
+        <Route path="/article/add" element={<AddArticlePage />} />
       </Routes>
     </Router>
   );

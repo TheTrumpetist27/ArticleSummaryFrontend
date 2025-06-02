@@ -1,4 +1,4 @@
-const API_URL = 'https://localhost:7263/api/Company';
+const API_URL = 'http://localhost:8090/api/Company';
 
 export const GetAllCompanies = async () => {
     try {
