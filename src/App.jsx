@@ -6,6 +6,7 @@ import CompanyPage from "./pages/company/CompanyPage";
 import EditCompanyPage from "./pages/company/EditCompanyPage";
 import AddArticlePage from "./pages/article/AddArticlePage";
 import ArticlesPage from "./pages/article/ArticlesPage";
+import ArticleDetailPage from "./pages/article/ArticleDetailPage";
 
 const App = () => {
   return (
@@ -18,6 +19,7 @@ const App = () => {
         <Route path="/company/edit/:id" element={<EditCompanyPage />} />
         <Route path="/articles" element={<ArticlesPage />} />
         <Route path="/article/add" element={<AddArticlePage />} />
+        <Route path="/article/:id" element={<ArticleDetailPage />} />
       </Routes>
     </Router>
   );
