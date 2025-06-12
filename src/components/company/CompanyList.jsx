@@ -41,7 +41,7 @@ const CompanyList = () => {
                 </thead>
                 <tbody>
                     {companies.map((company) => (
-                        <tr key={company.id} className="hover:bg-sky-200 transition">
+                        <tr data-cy='company-card' key={company.id} className="hover:bg-sky-200 transition">
                             <td className="px-6 py-4 border-b border-slate-200 hover:cursor-pointer" onClick={() => navigate(`/company/${company.id}`)}>{company.name}</td>
                             <td className="px-6 py-4 border-b border-[--color-slate-200]">
                                 <CompanyDeleteButton onClick={() => handleDelete(company.id)} />

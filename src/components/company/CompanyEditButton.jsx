@@ -5,6 +5,7 @@ const CompanyEditButton = ({id}) => {
 
     return (
         <button
+            data-cy="edit-button"
             className="bg-error text-white px-4 py-2 rounded-md shadow-md hover:bg-error-hover transition hover:cursor-pointer"
             onClick={() => navigate(`/company/edit/${id}`)}
         >

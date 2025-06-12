@@ -32,6 +32,7 @@ const CompanyForm = ({ initialData = {}, onSubmit }) => {
             <div>
                 <label htmlFor="name" className="block text-sm font-medium text-slate-700">Company Name:</label>
                 <input
+                    data-cy="company-name"
                     type="text"
                     id="name"
                     name="name"
@@ -44,6 +45,7 @@ const CompanyForm = ({ initialData = {}, onSubmit }) => {
             <div>
                 <label htmlFor="ceoId" className="block text-sm font-medium text-slate-700">CEO ID:</label>
                 <input
+                    data-cy="company-ceo"
                     type="number"
                     id="ceoId"
                     name="ceoId"
@@ -54,7 +56,7 @@ const CompanyForm = ({ initialData = {}, onSubmit }) => {
                 />
             </div>
             <div className="text-center">
-                <button type="submit" className="inline-block w-full bg-sky-500 text-white py-2 px-4 rounded-xl hover:bg-sky-800 transition-colors hover:cursor-pointer">Submit</button>
+                <button data-cy="submit" type="submit" className="inline-block w-full bg-sky-500 text-white py-2 px-4 rounded-xl hover:bg-sky-800 transition-colors hover:cursor-pointer">Submit</button>
             </div>
         </form>
     );
