@@ -15,7 +15,6 @@ const CommentForm = ({ articleId, onCommentAdded }) => {
             articleId: articleId
         };
 
-        console.log("Submitting comment:", newComment);
         await onCommentAdded(newComment);
         setContent("");
     };

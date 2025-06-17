@@ -5,6 +5,7 @@ import AdminNavigation from "../../components/admin/AdminNavigation";
 import { DeleteComment, GetCommentsByArticleId, PostComment } from "../../services/CommentService";
 import CommentList from "../../components/comment/CommentList";
 import CommentForm from "../../components/comment/CommentForm";
+import * as signalR from "@microsoft/signalr";
 
 const ArticleDetailPage = () => {
     const { id } = useParams();
@@ -12,6 +13,41 @@ const ArticleDetailPage = () => {
     const [article, setArticle] = useState(location.state ?? null);
     const [loading, setLoading] = useState(!location.state);
     const [comments, setComments] = useState([]);
+    const [connection, setConnection] = useState(null);
+
+    useEffect(() => {
+        const newConnection = new signalR.HubConnectionBuilder()
+            .withUrl("http://localhost:8090/hubs/comments")
+            .withAutomaticReconnect()
+            .build();
+
+        setConnection(newConnection);
+    }, []);
+
+    useEffect(() => {
+        if (connection) {
+            connection
+                .start()
+                .then(() => {
+                    console.log("SignalR connection established");
+
+                    connection.on("ReceiveComment", (comment) => {
+                        setComments((prevComments) => [...prevComments, comment]);
+                    });
+
+                    connection.on("DeleteComment", (commentId) => {
+                        setComments((prevComments) => prevComments.filter(comment => comment.id !== commentId));
+                    });
+                })
+                .catch((error) => console.error("SignalR connection error:", error));
+        }
+
+        return () => {
+            if (connection) {
+                connection.stop()
+            }
+        };
+    }, [connection]);
 
     useEffect(() => {
         if (!article) {
@@ -32,9 +68,8 @@ const ArticleDetailPage = () => {
 
     const handleCommentAdded = async (newComment) => {
         try {
-            console.log("Adding comment:", newComment);
             const savedComment = await PostComment(newComment);
-            setComments((prevComments) => [...prevComments, savedComment]);
+            //setComments((prevComments) => [...prevComments, savedComment]);
         } catch (error) {
             console.error("Error adding comment:", error);
         }
@@ -42,9 +77,8 @@ const ArticleDetailPage = () => {
 
     const handleDeleteComment = async (commentId) => {
         const success = await DeleteComment(commentId);
-        if (success) {
-            setComments((prevComments) => prevComments.filter(comment => comment.id !== commentId));
-        } else {
+        //setComments((prevComments) => prevComments.filter(comment => comment.id !== commentId));
+        if (!success) {
             console.error("Error deleting comment");
         }
     };
