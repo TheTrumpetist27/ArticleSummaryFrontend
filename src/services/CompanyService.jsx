@@ -1,12 +1,9 @@
-const API_URL = 'http://localhost:8090/api/Company';
+import API from './API'
 
 export const GetAllCompanies = async () => {
     try {
-        const response = await fetch(API_URL);
-        if (!response.ok) {
-            throw new Error('Failed to fetch companies');
-        }
-        return await response.json();
+        const response = await API.get("/company");
+        return response.data;
     } catch (error) {
         console.error('Error fetching companies: ', error);
         return [];
@@ -15,11 +12,8 @@ export const GetAllCompanies = async () => {
 
 export const GetCompanyById = async (companyId) => {
     try {
-        const response = await fetch(`${API_URL}/${companyId}`);
-        if (!response.ok) {
-            throw new Error('Failed to fetch company');
-        }
-        return await response.json();
+        const response = await API.get(`/company/${companyId}`);
+        return response.data;
     } catch (error) {
         console.error('Error fetching company: ', error);
         return null;
@@ -28,53 +22,30 @@ export const GetCompanyById = async (companyId) => {
 
 export const CreateCompany = async (companyData) => {
     try {
-        const response = await fetch(API_URL, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(companyData),
-        });
-        if (!response.ok) {
-            throw new Error('Failed to create company');
-        }
-        return await response.json();
+        const response = await API.post("/company", companyData);
+        return response.data;
     } catch (error) {
         console.error('Error creating company: ', error);
         return null;
     }
-}
+};
 
 export const UpdateCompany = async (companyId, companyData) => {
     try {
-        const response = await fetch(`${API_URL}/${companyId}`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(companyData),
-        });
-        if (!response.ok) {
-            throw new Error('Failed to update company');
-        }
-        return await response.json();
+        const response = await API.put(`/company/${companyId}`, companyData);
+        return response.data;
     } catch (error) {
         console.error('Error updating company: ', error);
         return null;
     }
-}
+};
 
 export const DeleteCompany = async (companyId) => {
     try {
-        const response = await fetch(`${API_URL}/${companyId}`, {
-            method: 'DELETE',
-        });
-        if (!response.ok) {
-            throw new Error('Failed to delete company');
-        }
-        return await response.json();
+        const response = await API.delete(`/company/${companyId}`);
+        return response.data;
     } catch (error) {
         console.error('Error deleting company: ', error);
         return null;
     }
-}
+};

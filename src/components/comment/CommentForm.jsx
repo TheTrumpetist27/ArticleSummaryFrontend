@@ -28,7 +28,7 @@ const CommentForm = ({ articleId, onCommentAdded }) => {
                 value={content}
                 onChange={(e) => setContent(e.target.value)}
             />
-            <button type="submit" className="bg-blue-500 text-white px-4 py-1 rounded">
+            <button type="submit" className="bg-sky-500 text-white px-4 py-1 rounded cursor-pointer hover:bg-sky-800">
                 Verstuur
             </button>
         </form>
