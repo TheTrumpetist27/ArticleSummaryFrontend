@@ -3,7 +3,7 @@ const CommentItem = ({ comment, onDelete }) => {
         <div className="relative border rounded p-2 my-2">
             <button
                 onClick={() => onDelete(comment.id)}
-                className="text-red-600 text-sm mt-2 top-2 right-2 absolute hover:underline cursor-pointer"
+                className="text-red-500 text-sm mt-2 top-2 right-2 absolute hover:text-red-700 cursor-pointer rounded-md shadow-sm border border-red-500 hover:border-red-700 px-2 py-1"
             >
                 Verwijder
             </button>
