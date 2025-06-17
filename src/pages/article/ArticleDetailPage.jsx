@@ -6,6 +6,7 @@ import { DeleteComment, GetCommentsByArticleId, PostComment } from "../../servic
 import CommentList from "../../components/comment/CommentList";
 import CommentForm from "../../components/comment/CommentForm";
 import * as signalR from "@microsoft/signalr";
+import { isAuthenticated } from "../../services/AuthService";
 
 const ArticleDetailPage = () => {
     const { id } = useParams();
@@ -99,7 +100,13 @@ const ArticleDetailPage = () => {
                 <div className="mt-8">
                     <h2 className="text-xl font-semibold mb-2">Reacties</h2>
                     <CommentList comments={comments} onDelete={handleDeleteComment} />
-                    <CommentForm articleId={article.id} onCommentAdded={handleCommentAdded} />
+                    {isAuthenticated() ? (
+                        <CommentForm articleId={article.id} onCommentAdded={handleCommentAdded} />
+                    ) : (
+                        <p className="text-gray-600 mt-4 italic">
+                            Log in om een reactie te plaatsen.
+                        </p>
+                    )}
                 </div>
             </div>
         </div>
