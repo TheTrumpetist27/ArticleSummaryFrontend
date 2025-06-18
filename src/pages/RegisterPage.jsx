@@ -12,8 +12,12 @@ const RegisterPage = () => {
             alert("Registratie gelukt! Je kunt nu inloggen.");
             navigate("/login");
         } catch (error) {
-            console.error("Registratie mislukt:", error);
-            alert("Registratie mislukt. Probeer het opnieuw.");
+            if (error.response?.data?.includes("Gebruiker bestaat al")) {
+                alert("Deze gebruikersnaam is al in gebruik.");
+            } else {
+                console.error("Registratie mislukt:", error);
+                alert("Registratie mislukt. Probeer het opnieuw.");
+            }
         }
     };
 
