@@ -29,3 +29,18 @@ export const GetAllArticles = async () => {
         throw new Error('Failed to fetch articles');
     }
 };
+
+export const UpdateArticle = async (article) => {
+    const response = await API.put(`/article/${article.id}`, article);
+    return response.data;
+};
+
+export const DeleteArticle = async (articleId) => {
+    try {
+        const response = await API.delete(`/article/${articleId}`);
+        return response.status === 204; // Return true if deletion was successful
+    } catch (error) {
+        console.error('Error deleting article: ', error);
+        throw new Error('Failed to delete article');
+    }
+};

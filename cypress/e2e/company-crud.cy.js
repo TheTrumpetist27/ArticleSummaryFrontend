@@ -2,8 +2,11 @@ describe('Company CRUD Flow', () => {
   const testCompanyName = 'Test Company';
   const testCEOId = '12345';
   const updatedCompanyName = 'Updated Test Company';
+  beforeEach(() => {
+    cy.login();
+  });
 
-  it('Maakt een bedrijf aan', () => {
+  it('Maakt een bedrijf aan', () => {    
     cy.visit('http://localhost:5173/company/add');
 
     cy.get('[data-cy="company-name"]').type(testCompanyName);
@@ -48,4 +51,16 @@ describe('Company CRUD Flow', () => {
     cy.url().should('include', '/companies');
     cy.contains(updatedCompanyName).should('not.exist');
   });
-})
+
+  it('Blokkeert verzenden als required veld leeg is', () => {
+    cy.visit('http://localhost:5173/company/add');
+
+    cy.get('[data-cy="company-ceo"]').type(testCEOId);
+    cy.get('[data-cy="submit"]').click();
+
+    cy.get('[data-cy="company-name"]')
+      .then(($input) => {
+        expect($input[0].checkValidity()).to.be.false;
+      });
+  });
+});

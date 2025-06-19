@@ -14,6 +14,12 @@ const ArticlesPage = () => {
             .finally(() => setLoading(false));
     }, []);
 
+    const handleDeleted = () => {
+        GetAllArticles()
+            .then(setArticles)
+            .catch((error) => console.error(error));
+    };
+
     if (loading) return <div className="text-center p-4">Loading...</div>;
     if (articles.length === 0) return <div className="text-center p-4">No articles found</div>;
 
@@ -22,7 +28,7 @@ const ArticlesPage = () => {
             <AdminNavigation />
             <div className="p-4">
                 <h1 className="text-2xl font-bold mb-4">Alle Artikelen</h1>
-                <ArticleList articles={articles} />
+                <ArticleList articles={articles} onDeleted={handleDeleted} />
             </div>
         </div>
     );
